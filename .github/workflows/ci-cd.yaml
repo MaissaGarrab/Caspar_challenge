@@ -46,4 +46,4 @@ jobs:
     - name: Deploy to minikube
       run: helm upgrade caspar_challenge ../kubernetes --install --values=../kubernetes/values.yaml
     - name: Test service URLs
-      run: "minikube service list\nminikube service example --url\necho \"------------------opening the service------------------\"\ncurl $(minikube service example --url) \n#magic___^_^___line\n#magic___^_^___line\n"
+      run: "minikube service list\nminikube service spa-app --url\nnecho \\\"------------------opening the service------------------\\\"\ncurl $(minikube service example --url) \n"
