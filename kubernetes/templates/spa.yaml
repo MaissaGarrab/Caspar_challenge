@@ -1,0 +1,36 @@
+
+spaVersion: spas/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.spa.name }}
+  namespace: {{ .Values.spa.namespace }}
+  labels:
+    spa: {{ .Values.spa.name }}
+spec:
+  replicas: {{ .Values.spa.replicaCount }}
+  selector:
+    matchLabels:
+      spa: {{ .Values.spa.name }}
+  template:
+    metadata:
+      labels:
+        spa: {{ .Values.spa.name }}
+    spec:
+      containers:
+      - name: {{ .Values.spa.name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.spa.port }}
+---
+spaVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.spa.name }}
+  namespace: {{ .Values.spa.namespace }}
+spec:
+  selector:
+    spa: {{ .Values.spa.name }}
+  type: {{ .Values.spa.service.type }}
+  ports:
+    - targetPort: {{ .Values.spa.port }}
+      port: {{ .Values.spa.port }}

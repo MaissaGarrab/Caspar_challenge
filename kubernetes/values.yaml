@@ -1,0 +1,32 @@
+api:
+  name: api-app
+  namespace: default
+  replicaCount: 1
+  image:
+    repository: maissagarrab/api
+    tag: latest
+  service:
+    type: ClusterIP
+  port: 3000
+
+react:
+  name: spa-app
+  namespace: default
+  replicaCount: 1
+  image:
+    repository: maissagarrab/spa
+    tag: latest
+  service:
+    type: ClusterIP
+  port: 3000
+
+nginx:
+  name: nginx
+  namespace: default
+  replicaCount: 1
+  image:
+    repository: maissagarrab/nginx
+    tag: latest
+  service:
+    type: LoadBalancer
+  port: 80
